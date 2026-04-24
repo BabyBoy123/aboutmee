@@ -100,7 +100,7 @@ button{
   gap:10px;
 }
 
-.header-buttons button{
+.header-buttons button,.read-btn,.stop-btn{
   background:rgba(255,255,255,.12);
   color:white;
   backdrop-filter:blur(14px);
@@ -186,10 +186,16 @@ button{
   font-size:42px;
 }
 
+.panel-actions{
+  display:flex;
+  gap:10px;
+  margin-bottom:18px;
+}
+
 .content-box{
   white-space:pre-wrap;
   line-height:1.7;
-  max-height:460px;
+  max-height:420px;
   overflow-y:auto;
   padding-right:8px;
 }
@@ -205,15 +211,22 @@ button{
 
 .mobile-card-title{
   display:flex;
+  justify-content:space-between;
   gap:12px;
   align-items:center;
 }
 
-.mobile-card-title span{
+.mobile-card-left{
+  display:flex;
+  gap:12px;
+  align-items:center;
+}
+
+.mobile-card-left span{
   font-size:26px;
 }
 
-.mobile-card-title h3{
+.mobile-card-left h3{
   margin:0;
 }
 
@@ -233,6 +246,20 @@ button{
   max-height:320px;
   overflow-y:auto;
   opacity:1;
+}
+
+.mobile-actions{
+  display:none;
+  gap:10px;
+  margin-top:12px;
+}
+
+.mobile-card.open .mobile-actions{
+  display:flex;
+}
+
+.mobile-actions button{
+  flex:1;
 }
 
 #secret{
@@ -307,6 +334,11 @@ Please respect my feelings, boundaries, and comfort.
           <div class="big-icon" id="panelIcon">💙</div>
         </div>
 
+        <div class="panel-actions">
+          <button class="read-btn" onclick="readCurrentSection()">🔊 Read</button>
+          <button class="stop-btn" onclick="stopVoice()">🔇 Stop</button>
+        </div>
+
         <div class="content-box" id="panelContent">
 This page is here to help explain who I am, what I like, what I need, and what matters to me.
         </div>
@@ -329,6 +361,9 @@ This page is here to help explain who I am, what I like, what I need, and what m
 </audio>
 
 <script>
+let isUnlocked = false;
+let activeIndex = 0;
+
 const sections = [
   {
     icon:"🔥",
@@ -518,48 +553,69 @@ Happily taken`
 ];
 
 function unlock(){
-  const password=document.getElementById("pass").value;
+  const password = document.getElementById("pass").value;
 
-  if(password==="iloveyou"){
-    document.getElementById("login").style.display="none";
-    document.getElementById("main").style.display="block";
+  if(password === "iloveyou"){
+    isUnlocked = true;
+    stopVoice();
+
+    document.getElementById("login").style.display = "none";
+    document.getElementById("main").style.display = "block";
+
     loadSection(0);
-  }else{
+  } else {
     alert("Wrong password 💔");
   }
 }
 
 function buildLayout(){
-  const desktopMenu=document.getElementById("desktopMenu");
-  const mobileCards=document.getElementById("mobileCards");
+  const desktopMenu = document.getElementById("desktopMenu");
+  const mobileCards = document.getElementById("mobileCards");
 
   sections.forEach((section,index)=>{
-    const btn=document.createElement("button");
-    btn.innerHTML=`${section.icon} ${section.title}`;
-    btn.onclick=()=>loadSection(index);
+    const btn = document.createElement("button");
+    btn.innerHTML = `${section.icon} ${section.title}`;
+    btn.onclick = () => loadSection(index);
     desktopMenu.appendChild(btn);
 
-    const card=document.createElement("div");
-    card.className="mobile-card";
-    card.innerHTML=`
+    const card = document.createElement("div");
+    card.className = "mobile-card";
+    card.innerHTML = `
       <div class="mobile-card-title">
-        <span>${section.icon}</span>
-        <h3>${section.title}</h3>
+        <div class="mobile-card-left">
+          <span>${section.icon}</span>
+          <h3>${section.title}</h3>
+        </div>
+        <span>⌄</span>
       </div>
+
       <div class="mobile-content">${section.content}</div>
+
+      <div class="mobile-actions">
+        <button class="read-btn">🔊 Read</button>
+        <button class="stop-btn">🔇 Stop</button>
+      </div>
     `;
 
-    card.onclick=()=>{
+    card.querySelector(".mobile-card-title").onclick = () => {
       document.querySelectorAll(".mobile-card").forEach(c=>{
-        if(c!==card)c.classList.remove("open");
+        if(c !== card) c.classList.remove("open");
       });
 
       card.classList.toggle("open");
-      speechSynthesis.cancel();
+      activeIndex = index;
+      stopVoice();
+    };
 
-      if(card.classList.contains("open")){
-        speak(section.content);
-      }
+    card.querySelector(".read-btn").onclick = (event) => {
+      event.stopPropagation();
+      activeIndex = index;
+      speak(section.content);
+    };
+
+    card.querySelector(".stop-btn").onclick = (event) => {
+      event.stopPropagation();
+      stopVoice();
     };
 
     mobileCards.appendChild(card);
@@ -567,40 +623,58 @@ function buildLayout(){
 }
 
 function loadSection(index){
-  const section=sections[index];
+  activeIndex = index;
+  const section = sections[index];
 
-  document.getElementById("panelTitle").innerText=section.title;
-  document.getElementById("panelSubtitle").innerText=section.subtitle;
-  document.getElementById("panelIcon").innerText=section.icon;
-  document.getElementById("panelContent").innerText=section.content;
+  document.getElementById("panelTitle").innerText = section.title;
+  document.getElementById("panelSubtitle").innerText = section.subtitle;
+  document.getElementById("panelIcon").innerText = section.icon;
+  document.getElementById("panelContent").innerText = section.content;
 
   document.querySelectorAll(".menu button").forEach((btn,i)=>{
-    btn.classList.toggle("active",i===index);
+    btn.classList.toggle("active", i === index);
   });
 
-  speechSynthesis.cancel();
-  speak(section.content);
+  stopVoice();
+}
+
+function readCurrentSection(){
+  if(!isUnlocked) return;
+  speak(sections[activeIndex].content);
 }
 
 function speak(text){
-  const speech=new SpeechSynthesisUtterance(text);
-  speech.rate=.9;
-  speech.pitch=1.05;
+  if(!isUnlocked) return;
+
+  stopVoice();
+
+  const speech = new SpeechSynthesisUtterance(text);
+  speech.rate = 0.9;
+  speech.pitch = 1.05;
+
   speechSynthesis.speak(speech);
 }
 
+function stopVoice(){
+  speechSynthesis.cancel();
+}
+
 function toggleMusic(){
-  const music=document.getElementById("bgm");
+  const music = document.getElementById("bgm");
   music.paused ? music.play() : music.pause();
 }
 
 function showSecret(){
-  const secret=document.getElementById("secret");
-  secret.style.display=
-    secret.style.display==="none" || secret.style.display===""
+  const secret = document.getElementById("secret");
+  secret.style.display =
+    secret.style.display === "none" || secret.style.display === ""
       ? "block"
       : "none";
 }
+
+window.onload = () => {
+  stopVoice();
+};
 
 buildLayout();
 </script>
