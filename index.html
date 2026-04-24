@@ -6,300 +6,254 @@
 <title>For You 💙</title>
 
 <style>
-* {
-  box-sizing: border-box;
-}
+*{box-sizing:border-box}
 
-body {
-  margin: 0;
-  font-family: "Segoe UI", sans-serif;
-  min-height: 100vh;
-  color: white;
+body{
+  margin:0;
+  font-family:"Segoe UI",sans-serif;
+  min-height:100vh;
+  color:white;
   background:
-    radial-gradient(circle at top left, #38bdf8, transparent 35%),
-    radial-gradient(circle at bottom right, #1e3a8a, transparent 35%),
-    linear-gradient(135deg, #020617, #0f172a, #1e3a8a);
+    radial-gradient(circle at top left,#38bdf8,transparent 35%),
+    radial-gradient(circle at bottom right,#1e3a8a,transparent 35%),
+    linear-gradient(135deg,#020617,#0f172a,#1e3a8a);
 }
 
-/* LOGIN */
-#login {
-  position: fixed;
-  inset: 0;
-  z-index: 100;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  padding: 20px;
-  background: #020617;
+#login{
+  position:fixed;
+  inset:0;
+  z-index:100;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  padding:20px;
+  background:#020617;
 }
 
-.login-box {
-  width: 100%;
-  max-width: 360px;
-  padding: 30px;
-  border-radius: 30px;
-  text-align: center;
-  background: rgba(255,255,255,0.1);
-  backdrop-filter: blur(20px);
-  box-shadow: 0 30px 80px rgba(0,0,0,0.45);
+.login-box{
+  width:100%;
+  max-width:360px;
+  padding:30px;
+  border-radius:30px;
+  text-align:center;
+  background:rgba(255,255,255,.1);
+  backdrop-filter:blur(20px);
+  box-shadow:0 30px 80px rgba(0,0,0,.45);
 }
 
-.login-box h1 {
-  margin: 0 0 8px;
+.login-box input{
+  width:100%;
+  padding:15px;
+  border-radius:16px;
+  border:none;
+  outline:none;
+  margin:12px 0;
+  font-size:16px;
 }
 
-.login-box p {
-  color: #bfdbfe;
+button{
+  border:none;
+  cursor:pointer;
+  border-radius:16px;
+  padding:13px 16px;
+  font-weight:700;
 }
 
-.login-box input {
-  width: 100%;
-  padding: 15px;
-  border-radius: 16px;
-  border: none;
-  outline: none;
-  margin: 12px 0;
-  font-size: 16px;
+.login-box button{
+  width:100%;
+  background:#38bdf8;
+  color:#082f49;
 }
 
-.login-box button,
-button {
-  border: none;
-  cursor: pointer;
-  border-radius: 16px;
-  padding: 13px 16px;
-  font-weight: 700;
+.app{
+  display:none;
+  width:100%;
+  min-height:100vh;
+  padding:18px;
 }
 
-/* MAIN */
-.app {
-  display: none;
-  width: 100%;
-  min-height: 100vh;
-  padding: 18px;
+.app-shell{
+  max-width:1200px;
+  margin:auto;
 }
 
-.app-shell {
-  max-width: 1200px;
-  margin: auto;
+.header{
+  display:flex;
+  justify-content:space-between;
+  gap:14px;
+  align-items:center;
+  margin-bottom:18px;
 }
 
-/* HEADER */
-.header {
-  display: flex;
-  justify-content: space-between;
-  gap: 14px;
-  align-items: center;
-  margin-bottom: 18px;
+.header h1{
+  margin:0;
+  font-size:clamp(28px,4vw,44px);
 }
 
-.header h1 {
-  margin: 0;
-  font-size: clamp(28px, 4vw, 44px);
+.header p{
+  margin:5px 0 0;
+  color:#bfdbfe;
 }
 
-.header p {
-  margin: 5px 0 0;
-  color: #bfdbfe;
+.header-buttons{
+  display:flex;
+  gap:10px;
 }
 
-.header-buttons {
-  display: flex;
-  gap: 10px;
+.header-buttons button{
+  background:rgba(255,255,255,.12);
+  color:white;
+  backdrop-filter:blur(14px);
 }
 
-.header-buttons button {
-  background: rgba(255,255,255,0.12);
-  color: white;
-  backdrop-filter: blur(14px);
+.layout{
+  display:grid;
+  grid-template-columns:320px 1fr;
+  gap:18px;
 }
 
-/* LAYOUT */
-.layout {
-  display: grid;
-  grid-template-columns: 320px 1fr;
-  gap: 18px;
+.profile-card,.content-panel,.mobile-card,#secret{
+  background:rgba(255,255,255,.11);
+  backdrop-filter:blur(22px);
+  box-shadow:0 25px 70px rgba(0,0,0,.35);
 }
 
-/* PROFILE CARD */
-.profile-card {
-  padding: 24px;
-  border-radius: 30px;
-  background: rgba(255,255,255,0.12);
-  backdrop-filter: blur(20px);
-  box-shadow: 0 25px 60px rgba(0,0,0,0.35);
+.profile-card{
+  padding:24px;
+  border-radius:30px;
 }
 
-.avatar {
-  width: 72px;
-  height: 72px;
-  border-radius: 24px;
-  display: grid;
-  place-items: center;
-  font-size: 34px;
-  background: rgba(255,255,255,0.18);
-  margin-bottom: 14px;
+.avatar{
+  width:72px;
+  height:72px;
+  border-radius:24px;
+  display:grid;
+  place-items:center;
+  font-size:34px;
+  background:rgba(255,255,255,.18);
+  margin-bottom:14px;
 }
 
-.profile-card h2 {
-  margin: 0 0 8px;
+.profile-card p{
+  color:#dbeafe;
+  line-height:1.5;
 }
 
-.profile-card p {
-  color: #dbeafe;
-  line-height: 1.5;
+.menu{
+  display:flex;
+  flex-direction:column;
+  gap:10px;
+  margin-top:18px;
 }
 
-/* MENU */
-.menu {
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-  margin-top: 18px;
+.menu button{
+  width:100%;
+  text-align:left;
+  background:rgba(255,255,255,.1);
+  color:white;
+  transition:.25s;
 }
 
-.menu button {
-  width: 100%;
-  text-align: left;
-  background: rgba(255,255,255,0.1);
-  color: white;
-  transition: 0.25s;
+.menu button:hover,.menu button.active{
+  background:rgba(56,189,248,.35);
+  transform:translateX(4px);
 }
 
-.menu button:hover,
-.menu button.active {
-  background: rgba(56,189,248,0.35);
-  transform: translateX(4px);
+.content-panel{
+  min-height:580px;
+  padding:28px;
+  border-radius:34px;
 }
 
-/* CONTENT PANEL */
-.content-panel {
-  min-height: 580px;
-  padding: 28px;
-  border-radius: 34px;
-  background: rgba(255,255,255,0.11);
-  backdrop-filter: blur(22px);
-  box-shadow: 0 25px 70px rgba(0,0,0,0.35);
+.panel-top{
+  display:flex;
+  justify-content:space-between;
+  gap:12px;
+  margin-bottom:18px;
 }
 
-.panel-top {
-  display: flex;
-  justify-content: space-between;
-  gap: 12px;
-  align-items: start;
-  margin-bottom: 18px;
+.panel-top h2{
+  margin:0;
+  font-size:32px;
 }
 
-.panel-top h2 {
-  margin: 0;
-  font-size: 32px;
+.panel-top p{
+  margin:6px 0 0;
+  color:#bfdbfe;
 }
 
-.panel-top p {
-  margin: 6px 0 0;
-  color: #bfdbfe;
+.big-icon{
+  font-size:42px;
 }
 
-.big-icon {
-  font-size: 42px;
+.content-box{
+  white-space:pre-wrap;
+  line-height:1.7;
+  max-height:460px;
+  overflow-y:auto;
+  padding-right:8px;
 }
 
-.content-box {
-  white-space: pre-wrap;
-  line-height: 1.7;
-  color: #f8fafc;
-  max-height: 460px;
-  overflow-y: auto;
-  padding-right: 8px;
+.mobile-cards{
+  display:none;
 }
 
-/* SECRET */
-#secret {
-  display: none;
-  margin-top: 18px;
-  padding: 18px;
-  border-radius: 24px;
-  text-align: center;
-  background: rgba(255,255,255,0.12);
+.mobile-card{
+  padding:18px;
+  border-radius:24px;
 }
 
-/* MOBILE */
-.mobile-cards {
-  display: none;
+.mobile-card-title{
+  display:flex;
+  gap:12px;
+  align-items:center;
 }
 
-.mobile-card {
-  padding: 18px;
-  border-radius: 24px;
-  background: rgba(255,255,255,0.11);
-  backdrop-filter: blur(18px);
+.mobile-card-title span{
+  font-size:26px;
 }
 
-.mobile-card-title {
-  display: flex;
-  gap: 12px;
-  align-items: center;
+.mobile-card-title h3{
+  margin:0;
 }
 
-.mobile-card-title span {
-  font-size: 26px;
+.mobile-content{
+  max-height:0;
+  overflow:hidden;
+  opacity:0;
+  transition:.35s ease;
+  white-space:pre-wrap;
+  line-height:1.6;
 }
 
-.mobile-card-title h3 {
-  margin: 0;
+.mobile-card.open .mobile-content{
+  margin-top:14px;
+  padding-top:14px;
+  border-top:1px solid rgba(255,255,255,.14);
+  max-height:320px;
+  overflow-y:auto;
+  opacity:1;
 }
 
-.mobile-content {
-  max-height: 0;
-  overflow: hidden;
-  opacity: 0;
-  transition: 0.35s ease;
-  white-space: pre-wrap;
-  line-height: 1.6;
+#secret{
+  display:none;
+  margin-top:18px;
+  padding:18px;
+  border-radius:24px;
+  text-align:center;
 }
 
-.mobile-card.open .mobile-content {
-  margin-top: 14px;
-  padding-top: 14px;
-  border-top: 1px solid rgba(255,255,255,0.14);
-  max-height: 320px;
-  overflow-y: auto;
-  opacity: 1;
-}
-
-/* RESPONSIVE */
-@media (max-width: 800px) {
-  .app {
-    padding: 14px;
-  }
-
-  .header {
-    flex-direction: column;
-    align-items: stretch;
-  }
-
-  .header-buttons {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-  }
-
-  .layout {
-    display: block;
-  }
-
-  .profile-card {
-    margin-bottom: 14px;
-  }
-
-  .menu,
-  .content-panel {
-    display: none;
-  }
-
-  .mobile-cards {
-    display: flex;
-    flex-direction: column;
-    gap: 12px;
+@media(max-width:800px){
+  .app{padding:14px}
+  .header{flex-direction:column;align-items:stretch}
+  .header-buttons{display:grid;grid-template-columns:1fr 1fr}
+  .layout{display:block}
+  .profile-card{margin-bottom:14px}
+  .menu,.content-panel{display:none}
+  .mobile-cards{
+    display:flex;
+    flex-direction:column;
+    gap:12px;
   }
 }
 </style>
@@ -307,7 +261,6 @@ button {
 
 <body>
 
-<!-- LOGIN -->
 <div id="login">
   <div class="login-box">
     <h1>Private Page 💙</h1>
@@ -317,7 +270,6 @@ button {
   </div>
 </div>
 
-<!-- APP -->
 <div class="app" id="main">
   <div class="app-shell">
 
@@ -339,8 +291,8 @@ button {
         <div class="avatar">💙</div>
         <h2>For someone I trust</h2>
         <p>
-          If you’re reading this, then you’re important to me.
-          Please respect my feelings, boundaries, and comfort.
+If you’re reading this, then you’re important to me.
+Please respect my feelings, boundaries, and comfort.
         </p>
 
         <div class="menu" id="desktopMenu"></div>
@@ -356,7 +308,7 @@ button {
         </div>
 
         <div class="content-box" id="panelContent">
-          This page is here to help explain who I am, what I like, what I need, and what matters to me.
+This page is here to help explain who I am, what I like, what I need, and what matters to me.
         </div>
       </main>
 
@@ -379,82 +331,217 @@ button {
 <script>
 const sections = [
   {
-    icon: "🔥",
-    title: "Kinks",
-    subtitle: "Things I like",
-    content: `Paste your kinks text here`
+    icon:"🔥",
+    title:"Kinks",
+    subtitle:"Things I like",
+    content:`Musk
+Pup play
+Collars & leashes
+Bite marks
+Being marked
+Being bitten
+Creampies
+Teasing
+Having toy controlled
+Being told what to do
+Cuddle sex
+Skirt/thigh highs
+Being pinned
+Making out
+Growled at sexually
+Having my face into crotch
+Being told how well I’m taking it / doing stuff
+Musky boxers
+Knotted
+Jerking off together
+Making out + riding
+Being fucked in a hoodie
+Fingered
+Being treated like a puppy
+Double dildo
+Jerking dicks off together
+Grinding against each other
+Public teasing
+Being teased / fucked / sucking dick in partner’s hoodie
+Being dominated
+Pinned
+Forced into submission
+Fucked hard
+Face fucked
+Railed
+Praised
+Limited degrading
+Told what to do
+Cummed to the point it’s overfilled
+Hickeys
+Him
+Just him <33`
   },
   {
-    icon: "🧠",
-    title: "Mental Health",
-    subtitle: "Things to understand about me",
-    content: `Paste your mental health text here`
+    icon:"🧠",
+    title:"Mental Health",
+    subtitle:"Things to understand about me",
+    content:`Depression
+Trust issues
+Abandonment issues
+Anxiety
+Haphephobia
+PTSD
+GAD
+D.I.D
+ADHD
+Autism
+
+May have:
+BPD`
   },
   {
-    icon: "🚫",
-    title: "Turn Offs",
-    subtitle: "Things I do not like",
-    content: `Paste your turn offs text here`
+    icon:"🚫",
+    title:"Turn Offs",
+    subtitle:"Things I do not like",
+    content:`Being tied
+Beaten
+Whipped
+Being cut
+Blood
+Scat
+Toe beans
+Feet
+Knife play
+Piss stuff
+CNC
+BDSM
+Abuse
+Ignored when in pain
+R*ped
+Shared between multiple people
+Yelled at when making a mistake
+Choked
+Thrown about
+Slapping hard
+Locked up
+Paws / beans
+Male impregnation
+Phantom pregnancy
+Inflation`
   },
   {
-    icon: "💬",
-    title: "Nicknames",
-    subtitle: "Names I like being called",
-    content: `Paste your nicknames text here`
+    icon:"💬",
+    title:"Nicknames",
+    subtitle:"Names I like being called",
+    content:`Puppy
+Pretty boy
+Babyboy
+Cutie
+Love
+Pup
+Al
+Hun
+Honey
+Good puppy / pup
+Sweetie
+Sweetheart
+Oreo
+Dark`
   },
   {
-    icon: "⚠️",
-    title: "Boundaries",
-    subtitle: "Please respect these",
-    content: `Paste your boundaries text here`
+    icon:"⚠️",
+    title:"Boundaries",
+    subtitle:"Please respect these",
+    content:`Being hit
+Threatened
+Be honest
+Trust me
+Can’t handle poly
+Ignored
+Forced into stuff
+Having stuff hidden
+Not being respected`
   },
   {
-    icon: "❌",
-    title: "Don’t Dos",
-    subtitle: "Things that hurt me",
-    content: `Paste your don't dos text here`
+    icon:"❌",
+    title:"Don’t Dos",
+    subtitle:"Things that hurt me",
+    content:`Don’t use me
+Don’t push me around
+Don’t lie to me
+Don’t stab me behind my back
+Don’t leave without saying goodbye
+Don’t ignore me purposely
+Don’t say sexual stuff to others in front of me
+Don’t compare me to other relationships
+Don’t boss me around
+Don’t guilt trip me
+Don’t act like you own me
+Don’t throw me aside when someone else is there
+Don’t ignore me when something doesn’t go your way
+Don’t treat me badly
+Don’t emotionally, mentally, or physically abuse me
+Don’t do sexual stuff with others
+Don’t hide stuff from me
+Don’t “sexually test” stuff with others
+Don’t treat me like a toy
+Don’t use my name
+Don’t ask to ERP with others
+Don’t ask to have an open relationship
+Don’t force me into stuff
+Don’t yell at me
+Don’t make my feelings feel invalid`
   },
   {
-    icon: "😨",
-    title: "Fears",
-    subtitle: "Things that scare me",
-    content: `Paste your fears text here`
+    icon:"😨",
+    title:"Fears",
+    subtitle:"Things that scare me",
+    content:`Autophobia – fear of being alone
+Acrophobia – fear of heights
+Arachnophobia – fear of spiders
+Haphephobia – fear of touch
+GAD`
   },
   {
-    icon: "✨",
-    title: "Fun Facts",
-    subtitle: "Little things about me",
-    content: `Paste your fun facts text here`
+    icon:"✨",
+    title:"Fun Facts",
+    subtitle:"Little things about me",
+    content:`Favorite color is baby blue
+I’m kind, loving, and sweet
+I’m always looking to make friends
+I’m a furry
+Group owner
+Photography
+When I cry my body becomes super sensitive
+Love cuddles
+I’m an avatar creator
+I’m asexual / demi-romantic
+Love stargazing
+Happily taken`
   }
 ];
 
-let activeIndex = 0;
+function unlock(){
+  const password=document.getElementById("pass").value;
 
-function unlock() {
-  const password = document.getElementById("pass").value;
-
-  if (password === "iloveyou") {
-    document.getElementById("login").style.display = "none";
-    document.getElementById("main").style.display = "block";
+  if(password==="iloveyou"){
+    document.getElementById("login").style.display="none";
+    document.getElementById("main").style.display="block";
     loadSection(0);
-  } else {
+  }else{
     alert("Wrong password 💔");
   }
 }
 
-function buildLayout() {
-  const desktopMenu = document.getElementById("desktopMenu");
-  const mobileCards = document.getElementById("mobileCards");
+function buildLayout(){
+  const desktopMenu=document.getElementById("desktopMenu");
+  const mobileCards=document.getElementById("mobileCards");
 
-  sections.forEach((section, index) => {
-    const btn = document.createElement("button");
-    btn.innerHTML = `${section.icon} ${section.title}`;
-    btn.onclick = () => loadSection(index);
+  sections.forEach((section,index)=>{
+    const btn=document.createElement("button");
+    btn.innerHTML=`${section.icon} ${section.title}`;
+    btn.onclick=()=>loadSection(index);
     desktopMenu.appendChild(btn);
 
-    const card = document.createElement("div");
-    card.className = "mobile-card";
-    card.innerHTML = `
+    const card=document.createElement("div");
+    card.className="mobile-card";
+    card.innerHTML=`
       <div class="mobile-card-title">
         <span>${section.icon}</span>
         <h3>${section.title}</h3>
@@ -462,16 +549,15 @@ function buildLayout() {
       <div class="mobile-content">${section.content}</div>
     `;
 
-    card.onclick = () => {
-      document.querySelectorAll(".mobile-card").forEach(c => {
-        if (c !== card) c.classList.remove("open");
+    card.onclick=()=>{
+      document.querySelectorAll(".mobile-card").forEach(c=>{
+        if(c!==card)c.classList.remove("open");
       });
 
       card.classList.toggle("open");
-
       speechSynthesis.cancel();
 
-      if (card.classList.contains("open")) {
+      if(card.classList.contains("open")){
         speak(section.content);
       }
     };
@@ -480,44 +566,38 @@ function buildLayout() {
   });
 }
 
-function loadSection(index) {
-  activeIndex = index;
-  const section = sections[index];
+function loadSection(index){
+  const section=sections[index];
 
-  document.getElementById("panelTitle").innerText = section.title;
-  document.getElementById("panelSubtitle").innerText = section.subtitle;
-  document.getElementById("panelIcon").innerText = section.icon;
-  document.getElementById("panelContent").innerText = section.content;
+  document.getElementById("panelTitle").innerText=section.title;
+  document.getElementById("panelSubtitle").innerText=section.subtitle;
+  document.getElementById("panelIcon").innerText=section.icon;
+  document.getElementById("panelContent").innerText=section.content;
 
-  document.querySelectorAll(".menu button").forEach((btn, i) => {
-    btn.classList.toggle("active", i === index);
+  document.querySelectorAll(".menu button").forEach((btn,i)=>{
+    btn.classList.toggle("active",i===index);
   });
 
   speechSynthesis.cancel();
   speak(section.content);
 }
 
-function speak(text) {
-  const speech = new SpeechSynthesisUtterance(text);
-  speech.rate = 0.9;
-  speech.pitch = 1.05;
+function speak(text){
+  const speech=new SpeechSynthesisUtterance(text);
+  speech.rate=.9;
+  speech.pitch=1.05;
   speechSynthesis.speak(speech);
 }
 
-function toggleMusic() {
-  const music = document.getElementById("bgm");
-
-  if (music.paused) {
-    music.play();
-  } else {
-    music.pause();
-  }
+function toggleMusic(){
+  const music=document.getElementById("bgm");
+  music.paused ? music.play() : music.pause();
 }
 
-function showSecret() {
-  const secret = document.getElementById("secret");
-  secret.style.display =
-    secret.style.display === "none" || secret.style.display === ""
+function showSecret(){
+  const secret=document.getElementById("secret");
+  secret.style.display=
+    secret.style.display==="none" || secret.style.display===""
       ? "block"
       : "none";
 }
